@@ -23,16 +23,18 @@ app.use( (req, res, next)=>{
 // CREATE
 app.post("/machining-parameter-set", machining_controller.api_post_machining_parameter_set);
 
-// READ
+// READ all
 app.get("/machining-parameter-sets", machining_controller.api_get_machining_parameter_sets);
 
+// READ by id
+app.get("/machining-parameter-set/:id", machining_controller.api_get_machining_parameter_set)
 // UPDATE
 // app.patch korvaa vain tietyt kentät
 // app.put korvaa koko tiedon
 app.put("/machining-parameter-set/:id", machining_controller.api_put_machining_parameter_set);
 
 // DELETE
-app.delete("/machining-parameter-set/:id", machining_controller.api_delete_material);
+app.delete("/machining-parameter-set/:id", machining_controller.api_delete_machining_parameter_set);
 
 
 const database_uri ="mongodb+srv://machining-user:K518bR7grgQpZhFQ@cluster0-hubzr.mongodb.net/test?retryWrites=true&w=majority"

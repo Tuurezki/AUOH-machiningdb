@@ -31,7 +31,7 @@ const api_post_machining_parameter_set = (req, res, next) => {
     
 };
 
-// READ
+// READ all
 const api_get_machining_parameter_sets = (req, res, next)=>{
     console.log('api_get_machining_parameter_sets');
 
@@ -45,6 +45,22 @@ const api_get_machining_parameter_sets = (req, res, next)=>{
         console.log(err);
     });
 
+};
+
+// READ by id
+const api_get_machining_parameter_set = (req, res, next) => {
+    console.log('api_get_machining_parameter_set');
+    let id = req.params.id;
+    let data = machining_data(req);
+
+    machining_model.findById(id)
+    .then(materials => {
+        res.send(JSON.stringify(materials));
+    }).catch(err => {
+        res.status(500);
+        res.send(err.errmsg);
+        console.log(err);
+    });
 };
 
 // UPDATE
@@ -68,8 +84,9 @@ const api_put_machining_parameter_set = (req, res, next) => {
 // DELETE 
 // DELETE /api/material/5e877019ab6c9e3a4868f634
 const api_delete_machining_parameter_set = (req, res, next) => {
+    console.log('api_delete_machining_parameter_set');
     let id = req.params.id;
-    material_model.findByIdAndRemove(id).then(() => {
+    machining_model.findByIdAndRemove(id).then(() => {
         res.send();
     }).catch(err => {
         res.status(500);
@@ -80,8 +97,8 @@ const api_delete_machining_parameter_set = (req, res, next) => {
 
 
 // EXPORTS
-module.exports.api_post_machining_parameter_set = api_post_machining_parameter_set; // lisää parametrisetti
-module.exports.api_get_machining_parameter_sets = api_get_machining_parameter_sets; // kysy kaikki parametrisetit
-// kysy tietty parametrisetti PUUTTUUU
-module.exports.api_put_machining_parameter_set = api_put_machining_parameter_set; // päivitä parametrisetti
+module.exports.api_post_machining_parameter_set = api_post_machining_parameter_set;     // lisää parametrisetti
+module.exports.api_get_machining_parameter_sets = api_get_machining_parameter_sets;     // kysy kaikki parametrisetit
+module.exports.api_get_machining_parameter_set = api_get_machining_parameter_set;       // kysy tietty parametrisetti 
+module.exports.api_put_machining_parameter_set = api_put_machining_parameter_set;       // päivitä parametrisetti
 module.exports.api_delete_machining_parameter_set = api_delete_machining_parameter_set; // poista parametrisetti
